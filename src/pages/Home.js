@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
 import 'tailwindcss/tailwind.css';
+import { IoHeart } from "react-icons/io5";
 
 import { useFirebase } from '../context/Firebase'
 import { Link } from 'react-router-dom';
@@ -31,16 +32,16 @@ const Home = () => {
 
     return (
         <>
-            {/* <button><Link to='/try'>New Home</Link></button> */}
             <div className="header h-screen">
                 <div className="nav w-screen ">
                     <div>
-                        <div className="name">CRC</div>
+                        <div className="name"><IoHeart className='text-red-600 w-12 h-12 transition-transform duration-1000 animate-pulse hover:scale-125' /></div>
                         <div className="logo">MediSimplify</div>
                         <div className="flex flex-row space-x-6 rounded-md">
                             <div className="button">
-                                <a id='helpdesk' href="#">
-                                    <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'>Help</div>
+                                <a className='flex flex-row space-x-5' href="#">
+                                    <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'>About</div>
+                                    <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'><Link to="/voice">Speech</Link></div>
                                 </a>
                             </div>
                             <div className='w-12 h-12 rounded-full relative flex items-center justify-center bg-green-700 hover:bg-blue-400 shadow-md cursor-pointer'>
@@ -50,8 +51,8 @@ const Home = () => {
                                 <div className="absolute bg-white rounded shadow-lg p-4 mt-12 w-48">
                                     <div className="flex flex-col items-start gap-8 mt-2">
                                         <div className='flex flex-row space-x-2'>
-                                        <Link> <button className="text-green-500 pl-6 hover:bg-white hover:text-red-600">Logout </button></Link>
-                                        <Link><button className="text-green-500 pl-2 hover:bg-white hover:text-red-600 text-lg"><IoLogOutOutline /></button></Link>
+                                            <Link> <button className="text-green-500 pl-6 hover:bg-white hover:text-red-600">Logout </button></Link>
+                                            <Link><button className="text-green-500 pl-2 hover:bg-white hover:text-red-600 text-lg"><IoLogOutOutline /></button></Link>
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +99,7 @@ const Home = () => {
                                     </a>
                                 </div>
                                 <div className="sheduling">
-                                    <a href="shedulingAlgo/shedulingAlgo.html">
+                                    <Link to="/voice">
                                         <div className="image">
                                             <img src="" alt='med' />
                                             <div className="link">LEARN MORE -</div>
@@ -109,7 +110,7 @@ const Home = () => {
                                             Empowering patients by simplifying medical terminology,
                                             facilitating better understanding and informed decision-making.
                                         </div>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
