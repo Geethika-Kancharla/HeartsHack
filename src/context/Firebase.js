@@ -8,7 +8,7 @@ import {
     signOut,
     signInWithPopup
 } from 'firebase/auth'
-import { getFirestore, collection, query, where, getDocs, addDoc, doc, setDoc, serverTimestamp, Timestamp } from "firebase/firestore";
+import { getFirestore, collection, query, where, orderBy, getDocs, addDoc, doc, setDoc, serverTimestamp, Timestamp } from "firebase/firestore";
 
 
 const FirebaseContext = createContext(null);
@@ -40,6 +40,7 @@ export const FirebaseProvider = (props) => {
 
     const [user, setUser] = useState(null);
     const [currUser, setCurrUser] = useState();
+    const [currMessage, setCurrMessage] = useState();
 
     useEffect(() => {
         onAuthStateChanged(firebaseAuth, user => {
@@ -118,6 +119,43 @@ export const FirebaseProvider = (props) => {
         }
     };
 
+    const getMessage = async (user) => {
+        if (user) {
+            try {
+                const qr = query(
+                    collection(firestore, "messages"),
+                    where("userId", "==", user.uid)
+                );
+                const querySnap = await getDocs(qr);
+                const fetchedMessages = [];
+                querySnap.forEach((doc) => {
+                    fetchedMessages.push(doc.data());
+                });
+                setCurrMessage(fetchedMessages);
+            } catch (error) {
+                console.error("Error fetching message data:", error);
+            }
+        } else {
+            console.log("Message is null in getData");
+        }
+    };
+
+
+    console.log(currMessage);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
+            if (user) {
+                await getMessage(user);
+            } else {
+                setCurrMessage(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
             if (user) {
@@ -143,7 +181,6 @@ export const FirebaseProvider = (props) => {
     }
     const isLoggedIn = user ? true : false;
 
-
     const handleLogout = async () => {
         try {
             await signOut(firebaseAuth);
@@ -162,7 +199,9 @@ export const FirebaseProvider = (props) => {
             isLoggedIn,
             handleLogout,
             getData,
-            handleMessage
+            handleMessage,
+            currMessage,
+            getMessage
         }}>
             {props.children}
         </FirebaseContext.Provider>
