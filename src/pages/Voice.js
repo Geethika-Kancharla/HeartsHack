@@ -1,4 +1,7 @@
 import React from 'react'
+import { MdOutlineNotStarted } from "react-icons/md";
+import { FaRegStopCircle } from "react-icons/fa";
+import { GrPowerReset } from "react-icons/gr";
 
 const Voice = () => {
     return (
@@ -7,16 +10,17 @@ const Voice = () => {
 
             </div>
             <div className="w-px h-screen bg-gray-400"></div>
-            <div className="w-2/5 h-screen flex flex-col justify-center items-center">
-                <h2 className="text-lg font-semibold mb-4">Heading</h2>
-                <p className="text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec odio vitae felis pharetra aliquam.</p>
-                <div className="w-32 h-32 bg-white rounded-lg shadow-md mb-6"></div>
-                <div className="flex space-x-4">
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">Button 1</button>
-                    <button className="px-4 py-2 bg-green-500 text-white rounded-lg">Button 2</button>
-                    <button className="px-4 py-2 bg-red-500 text-white rounded-lg">Button 3</button>
-                    <button className="px-4 py-2 bg-red-500 text-white rounded-lg">Button 4</button>
+            <div className="w-2/5 h-screen flex flex-col ">
+                <h2 className="font-semibold mt-3 text-3xl text-center">Speech To Text</h2>
+                <p className="text-gray-600 mb-6 text-center mt-8">Effortlessly transcribe spoken language into written form, simplifying communication through advanced voice recognition.</p>
+                <div className="w-5/6 h-5/6 bg-white rounded-lg ml-12 shadow-md mb-6"></div>
+                <div className="flex gap-2 ml-24">
+                    <button className="text-7xl  text-green-300 hover:bg-white rounded-full"><MdOutlineNotStarted /></button>
+                    <button className="text-6xl text-green-300 hover:bg-white rounded-full"><FaRegStopCircle /></button>
+                    <button className="text-6xl text-green-300 hover:bg-white rounded-full"><GrPowerReset /></button>
+
                 </div>
+                <button className="px-5 py-3 w-fit m-9 ml-64 text-xl bg-blue-600 hover:border text-white rounded-lg">Post</button>
             </div>
         </div>
     )

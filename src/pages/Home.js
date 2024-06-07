@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './Home.css';
 import 'tailwindcss/tailwind.css';
 import { IoHeart } from "react-icons/io5";
-
 import { useFirebase } from '../context/Firebase'
 import { Link } from 'react-router-dom';
 import { IoLogOutOutline } from "react-icons/io5";
