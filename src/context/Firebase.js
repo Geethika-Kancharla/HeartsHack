@@ -8,7 +8,7 @@ import {
     signOut,
     signInWithPopup
 } from 'firebase/auth'
-import { getFirestore, collection, query, where, getDocs, addDoc, doc, setDoc, serverTimestamp, Timestamp } from "firebase/firestore";
+import { getFirestore, collection, query, where, orderBy, getDocs, addDoc, doc, setDoc, serverTimestamp, Timestamp } from "firebase/firestore";
 
 
 const FirebaseContext = createContext(null);
@@ -120,16 +120,18 @@ export const FirebaseProvider = (props) => {
     };
 
     const getMessage = async (user) => {
-        if (user) { // Check if user is not null
+        if (user) {
             try {
-                const qr = query(collection(firestore, "messages"), where("userId", "==", user.uid));
+                const qr = query(
+                    collection(firestore, "messages"),
+                    where("userId", "==", user.uid)
+                );
                 const querySnap = await getDocs(qr);
                 const fetchedMessages = [];
                 querySnap.forEach((doc) => {
                     fetchedMessages.push(doc.data());
                 });
                 setCurrMessage(fetchedMessages);
-
             } catch (error) {
                 console.error("Error fetching message data:", error);
             }
@@ -137,6 +139,8 @@ export const FirebaseProvider = (props) => {
             console.log("Message is null in getData");
         }
     };
+
+
     console.log(currMessage);
 
     useEffect(() => {
@@ -196,7 +200,8 @@ export const FirebaseProvider = (props) => {
             handleLogout,
             getData,
             handleMessage,
-            currMessage
+            currMessage,
+            getMessage
         }}>
             {props.children}
         </FirebaseContext.Provider>

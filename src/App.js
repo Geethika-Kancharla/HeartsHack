@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import { useFirebase } from './context/Firebase';
 import Voice from './pages/Voice';
+import { Admin } from './pages/Admin';
 
 function App() {
 
@@ -22,6 +23,8 @@ function App() {
       <Route path='/register' element={<Register />} />
       <Route path='/home' element={<RequireAuth><Home /></RequireAuth>} />
       <Route path='/voice' element={<RequireAuth><Voice /></RequireAuth>} />
+      <Route path='/admin' element={<RequireAuth><Admin /></RequireAuth>} />
+
 
     </Routes>
 

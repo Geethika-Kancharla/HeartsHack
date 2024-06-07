@@ -3,23 +3,48 @@ import { MdOutlineNotStarted } from "react-icons/md";
 import { FaRegStopCircle } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import Card from '../components/Card';
-import { useFirebase } from '../context/Firebase';
+import Card from '../components/Card'; import { useFirebase } from '../context/Firebase';
 
 const Voice = () => {
     const firebase = useFirebase();
 
     const [message, setMessage] = useState();
 
+    const [currMessages, setCurrMessages] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Fetch data from Firebase
+                await firebase.getMessage();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData(); // Fetch data when component mounts
+    }, [firebase]);
+
+    useEffect(() => {
+        if (firebase.currMessage) {
+            // Sort messages by timeStamp
+            const sortedMessages = firebase.currMessage.sort((a, b) => b.timeStamp?.seconds - a.timeStamp?.seconds);
+            setCurrMessages(sortedMessages);
+        }
+    }, [firebase.currMessage]);
+
+
     const handleSendMessage = async (e) => {
         e.preventDefault();
         if (message) {
             await firebase.handleMessage(message);
-            setMessage("");
+            setMessage('');
         } else {
             console.error("Message is undefined or empty");
         }
-    }
+        await firebase.getMessage(firebase.user);
+    };
+
     const [isListening, setIsListening] = useState(false);
     const {
         transcript,
@@ -45,32 +70,41 @@ const Voice = () => {
         return <span>Browser doesn't support speech recognition.</span>;
     }
 
-    function getFormattedTimestamp(timestampSeconds) {
-        const date = new Date(timestampSeconds * 1000);
-        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-        return date.toLocaleDateString('en-US', options);
-    }
+    // function getFormattedTimestamp(timestampSeconds) {
+    //     if (timestampSeconds) {
+    //         const date = new Date(timestampSeconds * 1000);
+    //         const options = {
+    //             year: 'numeric',
+    //             month: 'long',
+    //             day: 'numeric',
+    //             hour: 'numeric',
+    //             minute: 'numeric'
+    //         };
+    //         return date.toLocaleDateString('en-US', options);
+    //     } else {
+    //         return 'No timestamp';
+    //     }
+    // }
+    // timeStamp={message.timeStamp ? message.timeStamp.seconds : null}
 
     return (
         <div className="flex flex-row bg-white h-screen w-screen">
             <div className="w-3/5 h-screen flex ">
                 <div className="w-full bg-white overflow-y-auto p-4 mb-28">
-                    {firebase.currMessage &&
-                        firebase.currMessage.map((message, index) => (
-                            <Card key={index} name={message.name} role={message.role} message={message.message} timeStamp={getFormattedTimestamp(message.timeStamp.seconds)} />
-                        )
-                        )
-                    }
+                    {currMessages &&
+                        currMessages.map((message, index) => (
+                            <Card key={index} name={message.name} role={message.role} message={message.message}
+                                timeStamp={message.timeStamp ? message.timeStamp.seconds : null} />
+                        ))}
                 </div>
                 <form onSubmit={handleSendMessage} className="mb-4">
-                    <div className="fixed bottom-0 left-0 w-3/5 bg-gray-100 px-4 py-2 flex items-center justify-between space-x-4">
+                    <div className="fixed bottom-0 left-0 w-3/5 bg-white shadow-md px-4 py-2 flex items-center justify-between space-x-4">
                         <textarea
                             value={transcript}
                             onChange={(e) => setMessage(e.target.value)}
-                            placeholder="Type your message here..."
-                            className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                        ></textarea>
-                        <button className="px-5 py-3 mt-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg w-fit">Post</button>
+                            placeholder="The message goes as..."
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"                         ></textarea>
+                        <button className="px-7 py-5 mt-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg w-fit">Post</button>
                     </div>
                 </form>
             </div>
@@ -80,9 +114,9 @@ const Voice = () => {
                 <p className="text-gray-600 mb-6 text-center mt-8">Effortlessly transcribe spoken language into written form, simplifying communication through advanced voice recognition.</p>
                 <div className="w-5/6 h-5/6 bg-white rounded-lg shadow-md mb-6 ml-16">{transcript}</div>
                 <div className="flex flex-row gap-1 ml-32 mb-9">
-                    <button className="text-6xl text-green-300 hover:bg-white rounded-full cursor-pointer" onClick={handleStartListening} disabled={isListening}><MdOutlineNotStarted /></button>
-                    <button className="text-5xl text-green-300 hover:bg-white rounded-full cursor-pointer" onClick={handleStopListening} disabled={!isListening}><FaRegStopCircle /></button>
-                    <button className="text-5xl text-green-300 hover:bg-white rounded-full cursor-pointer" onClick={resetTranscript}><GrPowerReset /></button>
+                    <button className="text-6xl text-green-300 bg-white hover:bg-white rounded-full cursor-pointer" onClick={handleStartListening} disabled={isListening}><MdOutlineNotStarted /></button>
+                    <button className="text-5xl text-green-300 bg-white hover:bg-white rounded-full cursor-pointer" onClick={handleStopListening} disabled={!isListening}><FaRegStopCircle /></button>
+                    <button className="text-5xl text-green-300 bg-white hover:bg-white rounded-full cursor-pointer" onClick={resetTranscript}><GrPowerReset /></button>
                 </div>
 
             </div>

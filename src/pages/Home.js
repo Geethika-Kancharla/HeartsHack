@@ -34,7 +34,7 @@ const Home = () => {
                                 <p className='text-white text-lg hover:text-black' onClick={handleClick}>{firebase.user?.email[0].toUpperCase()} </p>
                             </div>
                             {isMenu && (
-                                <div className="absolute bg-white rounded shadow-lg p-4 mt-12 w-48">
+                                <div className="absolute bg-white rounded shadow-lg p-4 mt-12 w-48 ">
                                     <div className="flex flex-col items-start gap-8 mt-2">
                                         <div className='flex flex-row space-x-2'>
                                             <Link> <button className="text-green-500 pl-6 hover:bg-white hover:text-red-600" onClick={firebase.handleLogout}>Logout </button></Link>
