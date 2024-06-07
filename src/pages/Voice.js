@@ -70,23 +70,6 @@ const Voice = () => {
         return <span>Browser doesn't support speech recognition.</span>;
     }
 
-    // function getFormattedTimestamp(timestampSeconds) {
-    //     if (timestampSeconds) {
-    //         const date = new Date(timestampSeconds * 1000);
-    //         const options = {
-    //             year: 'numeric',
-    //             month: 'long',
-    //             day: 'numeric',
-    //             hour: 'numeric',
-    //             minute: 'numeric'
-    //         };
-    //         return date.toLocaleDateString('en-US', options);
-    //     } else {
-    //         return 'No timestamp';
-    //     }
-    // }
-    // timeStamp={message.timeStamp ? message.timeStamp.seconds : null}
-
     return (
         <div className="flex flex-row bg-white h-screen w-screen">
             <div className="w-3/5 h-screen flex ">

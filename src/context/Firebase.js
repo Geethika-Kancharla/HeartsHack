@@ -99,6 +99,9 @@ export const FirebaseProvider = (props) => {
 
     }
 
+    const allowedRoles = ["Doctor", "Staff"];
+    const isAuthorized = allowedRoles.includes(currUser?.role);
+
     const getData = async (user) => {
         if (user) { // Check if user is not null
             try {
@@ -201,7 +204,8 @@ export const FirebaseProvider = (props) => {
             getData,
             handleMessage,
             currMessage,
-            getMessage
+            getMessage,
+            isAuthorized
         }}>
             {props.children}
         </FirebaseContext.Provider>

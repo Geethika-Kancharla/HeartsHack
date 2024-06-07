@@ -1,21 +1,19 @@
-import React, { useEffect } from 'react'
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import { useFirebase } from './context/Firebase';
 import Voice from './pages/Voice';
-import { Admin } from './pages/Admin';
+
 
 function App() {
-
   const firebase = useFirebase();
-
   const currentUser = firebase.isLoggedIn;
 
   const RequireAuth = ({ children }) => {
-    return currentUser ? children : <Navigate to="/"></Navigate>;
-  }
+    return currentUser ? children : <Navigate to="/" />;
+  };
 
   return (
     <Routes>
@@ -23,11 +21,7 @@ function App() {
       <Route path='/register' element={<Register />} />
       <Route path='/home' element={<RequireAuth><Home /></RequireAuth>} />
       <Route path='/voice' element={<RequireAuth><Voice /></RequireAuth>} />
-      <Route path='/admin' element={<RequireAuth><Admin /></RequireAuth>} />
-
-
     </Routes>
-
   );
 }
 
