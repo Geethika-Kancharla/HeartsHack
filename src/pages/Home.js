@@ -11,20 +11,7 @@ const Home = () => {
     const firebase = useFirebase();
     const [isMenu, setMenu] = useState(false);
 
-    // console.log(firebase.currUser);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             await firebase.getData();
-
-
-    //         } catch (error) {
-    //             console.error("Error fetching user data:", error);
-    //         }
-    //     };
-    //     fetchData();
-    // }, []);
     const handleClick = () => {
         setMenu(!isMenu);
     }
@@ -39,7 +26,7 @@ const Home = () => {
                         <div className="flex flex-row space-x-6 rounded-md">
                             <div className="button">
                                 <a className='flex flex-row space-x-5' href="#">
-                                    <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'>About</div>
+                                    <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'><Link to="/">About</Link></div>
                                     <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'><Link to="/voice">Speech</Link></div>
                                 </a>
                             </div>
@@ -50,8 +37,8 @@ const Home = () => {
                                 <div className="absolute bg-white rounded shadow-lg p-4 mt-12 w-48">
                                     <div className="flex flex-col items-start gap-8 mt-2">
                                         <div className='flex flex-row space-x-2'>
-                                            <Link> <button className="text-green-500 pl-6 hover:bg-white hover:text-red-600">Logout </button></Link>
-                                            <Link><button className="text-green-500 pl-2 hover:bg-white hover:text-red-600 text-lg"><IoLogOutOutline /></button></Link>
+                                            <Link> <button className="text-green-500 pl-6 hover:bg-white hover:text-red-600" onClick={firebase.handleLogout}>Logout </button></Link>
+                                            <Link><button className="text-green-500 pl-2 hover:bg-white hover:text-red-600 text-lg" onClick={firebase.handleLogout}><IoLogOutOutline /></button></Link>
                                         </div>
                                     </div>
                                 </div>
