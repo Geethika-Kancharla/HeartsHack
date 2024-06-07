@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 import 'tailwindcss/tailwind.css';
 
 import { useFirebase } from '../context/Firebase'
 import { Link } from 'react-router-dom';
+import { IoLogOutOutline } from "react-icons/io5";
 
 const Home = () => {
 
     const firebase = useFirebase();
+    const [isMenu, setMenu] = useState(false);
+
     // console.log(firebase.currUser);
 
     // useEffect(() => {
@@ -22,6 +25,9 @@ const Home = () => {
     //     };
     //     fetchData();
     // }, []);
+    const handleClick = () => {
+        setMenu(!isMenu);
+    }
 
     return (
         <>
@@ -31,10 +37,25 @@ const Home = () => {
                     <div>
                         <div className="name">CRC</div>
                         <div className="logo">MediSimplify</div>
-                        <div className="button">
-                            <a href="#" id="helpLink">
-                                <div>Help?</div>
-                            </a>
+                        <div className="flex flex-row space-x-6 rounded-md">
+                            <div className="button">
+                                <a id='helpdesk' href="#">
+                                    <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'>Help</div>
+                                </a>
+                            </div>
+                            <div className='w-12 h-12 rounded-full relative flex items-center justify-center bg-green-700 hover:bg-blue-400 shadow-md cursor-pointer'>
+                                <p className='text-white text-lg hover:text-black' onClick={handleClick}>{firebase.user?.email[0].toUpperCase()} </p>
+                            </div>
+                            {isMenu && (
+                                <div className="absolute bg-white rounded shadow-lg p-4 mt-12 w-48">
+                                    <div className="flex flex-col items-start gap-8 mt-2">
+                                        <div className='flex flex-row space-x-2'>
+                                        <Link> <button className="text-green-500 pl-6 hover:bg-white hover:text-red-600">Logout </button></Link>
+                                        <Link><button className="text-green-500 pl-2 hover:bg-white hover:text-red-600 text-lg"><IoLogOutOutline /></button></Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
