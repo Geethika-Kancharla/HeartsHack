@@ -87,7 +87,7 @@ const Home = () => {
                                 <div className="deadlock">
                                     <a href="deadlockAlgo/deadlock.html">
                                         <div className="image">
-                                            <div className="link">LEARN MORE -</div>
+                                            <div className="link">  </div>
                                             <div className="title">RECOMMENDED DIET FOR HEALTHY HEART</div>
                                         </div>
                                         <div className="text">
@@ -102,7 +102,7 @@ const Home = () => {
                                     <Link to="/voice">
                                         <div className="image">
                                             <img src="" alt='med' />
-                                            <div className="link">LEARN MORE -</div>
+                                            <div className="link"></div>
                                             <div className="title">TRANSLATE MEDICAL LANGUAGE</div>
                                         </div>
                                         <div className="text">
