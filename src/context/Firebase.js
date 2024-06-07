@@ -50,7 +50,6 @@ export const FirebaseProvider = (props) => {
         })
     }, [])
 
-
     const addUser = (email, password, name, role, phno) => {
         createUserWithEmailAndPassword(firebaseAuth, email, password)
             .then((userCredential) => {
@@ -77,22 +76,61 @@ export const FirebaseProvider = (props) => {
             });
     };
 
-    const getData = async () => {
-        try {
-            const q = query(collection(firestore, "users"), where("userId", "==", user.uid));
-            const querySnapshot = await getDocs(q);
-            const userDoc = querySnapshot.docs[0]; // Assuming there's only one document for the user
+    const handleMessage = async (message) => {
 
-            if (userDoc.exists) {
-                setCurrUser(userDoc.data()); // Set current user data
-            } else {
-                console.log("No user document found");
+        const messageDetail = {
+            name: currUser?.name,
+            role: currUser?.role,
+            message,
+            timeStamp: serverTimestamp(),
+            userId: user.uid
+        };
+        const randomId = Math.random().toString(36).substring(2, 15);
+        const messageDocRef = doc(firestore, 'messages', randomId);
+
+        setDoc(messageDocRef, messageDetail)
+            .then(() => {
+                console.log('User document created with UID: ', randomId);
+            })
+            .catch((error) => {
+                console.error('Error creating user document: ', error);
+            });
+
+    }
+
+    const getData = async (user) => {
+        if (user) { // Check if user is not null
+            try {
+                const q = query(collection(firestore, "users"), where("userId", "==", user.uid));
+                const querySnapshot = await getDocs(q);
+                const userDoc = querySnapshot.docs[0]; // Assuming there's only one document for the user
+
+                if (userDoc.exists) {
+                    setCurrUser(userDoc.data()); // Set current user data
+                } else {
+                    console.log("No user document found");
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
             }
-        } catch (error) {
-            console.error("Error fetching user data:", error);
+        } else {
+            console.log("User is null in getData");
         }
     };
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
+            if (user) {
+                await getData(user); // Call getData on user change
+            } else {
+                setCurrUser(null); // Clear user data on logout
+            }
+        });
+
+        return () => unsubscribe(); // Cleanup function to prevent memory leaks
+    }, []);
+
+    console.log(currUser);
 
 
 
@@ -123,7 +161,8 @@ export const FirebaseProvider = (props) => {
             signinWithGoogle,
             isLoggedIn,
             handleLogout,
-            getData
+            getData,
+            handleMessage
         }}>
             {props.children}
         </FirebaseContext.Provider>
