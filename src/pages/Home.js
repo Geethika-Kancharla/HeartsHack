@@ -26,7 +26,7 @@ const Home = () => {
                         <div className="flex flex-row space-x-6 rounded-md">
                             <div className="button">
                                 <a className='flex flex-row space-x-5' href="#">
-                                    <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'><Link to="/">About</Link></div>
+                                    <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'><Link to="/about">About</Link></div>
                                     <div className='rounded-md p-2 px-6 text-lg border border-black hover:bg-black hover:text-white'><Link to="/voice">Speech</Link></div>
                                 </a>
                             </div>

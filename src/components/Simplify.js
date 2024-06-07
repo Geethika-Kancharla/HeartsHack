@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
+const Simplify = ({ input }) => {
 
-const MedicalTermSimplifier = () => {
-  const [inputText, setInputText] = useState('');
   const [simplifiedText, setSimplifiedText] = useState('');
 
   // Custom dictionary of medical terms and their simplified versions
@@ -313,10 +312,10 @@ const MedicalTermSimplifier = () => {
     "virus": "infectious agent",
     "x-ray": "radiograph"
 
-    // Add more terms as needed
+
   };
 
-  // Function to simplify medical terms in text
+
   const simplifyMedicalTerms = (text) => {
     let simplifiedText = text;
 
@@ -328,26 +327,17 @@ const MedicalTermSimplifier = () => {
     return simplifiedText;
   };
 
-  // Handler function for simplifying text
-  const handleSimplifyText = () => {
-    const simplified = simplifyMedicalTerms(inputText);
+  useEffect(() => {
+    const simplified = simplifyMedicalTerms(input);
     setSimplifiedText(simplified);
-  };
+  }, [input]);
 
   return (
-    <div>
-      <textarea
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-        placeholder="Enter text containing medical terms..."
-      />
-      <button onClick={handleSimplifyText}>Simplify Text</button>
-      <div>
-        <h2>Simplified Text:</h2>
-        <p>{simplifiedText}</p>
-      </div>
+    <div className='flex flex-col space-y-8'>
+      <h2 className='font-bold text-center'>Here is the simplified version:</h2>
+      <p className='text-justify px-3 pb-3'>{simplifiedText}</p>
     </div>
   );
 };
 
-export default MedicalTermSimplifier;
+export default Simplify;

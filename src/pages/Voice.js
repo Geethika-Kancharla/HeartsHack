@@ -3,7 +3,9 @@ import { MdOutlineNotStarted } from "react-icons/md";
 import { FaRegStopCircle } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import Card from '../components/Card'; import { useFirebase } from '../context/Firebase';
+import Card from '../components/Card';
+import { useFirebase } from '../context/Firebase';
+import Simplify from '../components/Simplify';
 
 const Voice = () => {
     const firebase = useFirebase();
@@ -101,7 +103,7 @@ const Voice = () => {
                     <button className="text-5xl text-green-300 bg-white hover:bg-white rounded-full cursor-pointer" onClick={handleStopListening} disabled={!isListening}><FaRegStopCircle /></button>
                     <button className="text-5xl text-green-300 bg-white hover:bg-white rounded-full cursor-pointer" onClick={resetTranscript}><GrPowerReset /></button>
                 </div>
-
+                <Simplify input={transcript} />
             </div>
         </div>
     )
