@@ -40,6 +40,7 @@ export const FirebaseProvider = (props) => {
 
     const [user, setUser] = useState(null);
     const [currUser, setCurrUser] = useState();
+    const [currMessage, setCurrMessage] = useState();
 
     useEffect(() => {
         onAuthStateChanged(firebaseAuth, user => {
@@ -118,6 +119,39 @@ export const FirebaseProvider = (props) => {
         }
     };
 
+    const getMessage = async (user) => {
+        if (user) { // Check if user is not null
+            try {
+                const qr = query(collection(firestore, "messages"), where("userId", "==", user.uid));
+                const querySnap = await getDocs(qr);
+                const fetchedMessages = [];
+                querySnap.forEach((doc) => {
+                    fetchedMessages.push(doc.data());
+                });
+                setCurrMessage(fetchedMessages);
+
+            } catch (error) {
+                console.error("Error fetching message data:", error);
+            }
+        } else {
+            console.log("Message is null in getData");
+        }
+    };
+    console.log(currMessage);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
+            if (user) {
+                await getMessage(user);
+            } else {
+                setCurrMessage(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
             if (user) {
@@ -143,7 +177,6 @@ export const FirebaseProvider = (props) => {
     }
     const isLoggedIn = user ? true : false;
 
-
     const handleLogout = async () => {
         try {
             await signOut(firebaseAuth);
@@ -162,7 +195,8 @@ export const FirebaseProvider = (props) => {
             isLoggedIn,
             handleLogout,
             getData,
-            handleMessage
+            handleMessage,
+            currMessage
         }}>
             {props.children}
         </FirebaseContext.Provider>

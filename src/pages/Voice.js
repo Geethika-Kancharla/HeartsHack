@@ -13,14 +13,13 @@ const Voice = () => {
 
     const handleSendMessage = async (e) => {
         e.preventDefault();
-        if (message) { // Check if message is not undefined or empty
-            await firebase.handleMessage(message); // Assuming handleMessage sets the message in Firestore
-            setMessage(""); // Reset the message state after sending
+        if (message) {
+            await firebase.handleMessage(message);
+            setMessage("");
         } else {
             console.error("Message is undefined or empty");
         }
     }
-
     const [isListening, setIsListening] = useState(false);
     const {
         transcript,
@@ -46,11 +45,23 @@ const Voice = () => {
         return <span>Browser doesn't support speech recognition.</span>;
     }
 
+    function getFormattedTimestamp(timestampSeconds) {
+        const date = new Date(timestampSeconds * 1000);
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
 
     return (
         <div className="flex flex-row bg-white h-screen w-screen">
-            <div className="w-3/5 h-screen flex justify-center items-center">
-                <Card />
+            <div className="w-3/5 h-screen flex ">
+                <div className="w-full bg-white overflow-y-auto p-4 mb-28">
+                    {firebase.currMessage &&
+                        firebase.currMessage.map((message, index) => (
+                            <Card key={index} name={message.name} role={message.role} message={message.message} timeStamp={getFormattedTimestamp(message.timeStamp.seconds)} />
+                        )
+                        )
+                    }
+                </div>
                 <form onSubmit={handleSendMessage} className="mb-4">
                     <div className="fixed bottom-0 left-0 w-3/5 bg-gray-100 px-4 py-2 flex items-center justify-between space-x-4">
                         <textarea
