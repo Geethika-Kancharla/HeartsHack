@@ -142,8 +142,8 @@ function About() {
                 </div>
 
               </div>
-               {/* Symptom 4: Irregular heartbeat */}
-            <div className=" ml-2 w-1/3 bg-white flex flex-col border border-black rounded-md ml-au">
+              {/* Symptom 4: Irregular heartbeat */}
+              <div className=" ml-56 w-1/3 bg-white flex flex-col border border-black rounded-md ml-au">
                 <div className="w-full p-2">
                   <div className="rounded-lg overflow-hidden bg-white shadow-md">
                     <div className="p-4">
@@ -159,7 +159,7 @@ function About() {
               </div>
 
               {/* Symptom 5: Lightheadedness or fainting */}
-              <div className="ml-56 w-1/3 bg-white flex flex-col border border-black rounded-md">
+              <div className="ml-2 w-1/3 bg-white flex flex-col border border-black rounded-md">
                 <div className="w-full p-2">
                   <div className="rounded-lg overflow-hidden bg-white shadow-md">
                     <div className="p-4">
@@ -174,9 +174,9 @@ function About() {
 
               </div>
             </div>
-           
 
-            
+
+
             {/* Preventive Measures */}
             <h3 className=' m-9 text-5xl text-center font-bold'>Preventive Measures for Cardiac Diseases</h3>
             <div className="card bg-white mt-8">
