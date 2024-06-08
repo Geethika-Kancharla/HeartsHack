@@ -332,7 +332,8 @@ const Simplify = ({ input }) => {
 
   "Arrhythmia": "Irregular heartbeat",
   "Arthralgia": "Joint pain",
-  "pulmonary disease":"lung disease"
+  "pulmonary disease":"lung disease",
+  "pericardium":"protective sac around the heart"
 
 
   };
