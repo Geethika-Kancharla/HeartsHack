@@ -10,9 +10,7 @@ import {
 } from 'firebase/auth'
 import { getFirestore, collection, query, where, getDocs, doc, setDoc, serverTimestamp } from "firebase/firestore";
 
-
 const FirebaseContext = createContext(null);
-
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
