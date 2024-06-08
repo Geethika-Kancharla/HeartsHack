@@ -148,6 +148,11 @@ const Home = () => {
                                     <p className="text-xs text-gray-500 mt-3"></p>
                                 </div>
                             </div>
+                            <div class="text-center">
+    <p>&copy; 2024 MediSimplify. Made With Love By Three Coders.</p>
+</div>
+
+                           
                         </section>
                     </div>
                 </div>
