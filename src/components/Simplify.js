@@ -331,7 +331,8 @@ const Simplify = ({ input }) => {
   "Artrial fibrillation": "irregular and often rapid heart rate, which can increase the risk of stroke and other heart-related complications",
 
   "Arrhythmia": "Irregular heartbeat",
-  "Arthralgia": "Joint pain"
+  "Arthralgia": "Joint pain",
+  "pulmonary disease":"lung disease"
 
 
   };
