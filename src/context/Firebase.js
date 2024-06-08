@@ -8,7 +8,7 @@ import {
     signOut,
     signInWithPopup
 } from 'firebase/auth'
-import { getFirestore, collection, query, where, orderBy, getDocs, addDoc, doc, setDoc, serverTimestamp, Timestamp } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs, doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 
 const FirebaseContext = createContext(null);
@@ -96,7 +96,6 @@ export const FirebaseProvider = (props) => {
             .catch((error) => {
                 console.error('Error creating user document: ', error);
             });
-
     }
 
     const allowedRoles = ["Doctor", "Staff"];
@@ -162,18 +161,16 @@ export const FirebaseProvider = (props) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
             if (user) {
-                await getData(user); // Call getData on user change
+                await getData(user);
             } else {
-                setCurrUser(null); // Clear user data on logout
+                setCurrUser(null);
             }
         });
 
-        return () => unsubscribe(); // Cleanup function to prevent memory leaks
+        return () => unsubscribe();
     }, []);
 
     console.log(currUser);
-
-
 
     const signinUserWithEmailAndPassword = (email, password) => {
         signInWithEmailAndPassword(firebaseAuth, email, password);
