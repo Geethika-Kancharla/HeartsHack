@@ -142,6 +142,21 @@ function About() {
                 </div>
 
               </div>
+               {/* Symptom 4: Irregular heartbeat */}
+            <div className=" ml-2 w-1/3 bg-white flex flex-col border border-black rounded-md ml-au">
+                <div className="w-full p-2">
+                  <div className="rounded-lg overflow-hidden bg-white shadow-md">
+                    <div className="p-4">
+                      <h3 className="font-bold">Palpitations</h3>
+                      <p>Feeling like your heart is racing, fluttering, pounding, or skipping beats.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full p-2 flex justify-center items-center">
+                  <img src="/assets/pal.jpg" alt="Palpitations" className="symptom-image h-48 w-auto" />
+                </div>
+
+              </div>
 
               {/* Symptom 5: Lightheadedness or fainting */}
               <div className="ml-56 w-1/3 bg-white flex flex-col border border-black rounded-md">
@@ -159,6 +174,9 @@ function About() {
 
               </div>
             </div>
+           
+
+            
             {/* Preventive Measures */}
             <h3 className=' m-9 text-5xl text-center font-bold'>Preventive Measures for Cardiac Diseases</h3>
             <div className="card bg-white mt-8">
@@ -170,7 +188,7 @@ function About() {
                     <div className="rounded-lg overflow-hidden bg-white p-4 flex flex-col justify-center items-center">
                       <p className="list-item mb-2">1. Maintain a healthy diet low in saturated fats, cholesterol, and sodium</p>
                       <div className="w-60 h-60">
-                        <img src="/assets/1.webp" alt="Healthy diet" className="img-fluid object-cover w-full h-full" />
+                        <img src="/assets/1.jpg" alt="Healthy diet" className="img-fluid object-cover w-full h-full" />
                       </div>
                     </div>
                   </div>
