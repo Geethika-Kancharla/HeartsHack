@@ -310,7 +310,28 @@ const Simplify = ({ input }) => {
     "vasoconstriction": "blood vessel narrowing",
     "vasodilation": "blood vessel widening",
     "virus": "infectious agent",
-    "x-ray": "radiograph"
+    "x-ray": "radiograph",
+    "Hyperlipidemia": "high levels of fats (such as cholesterol) in the blood",
+  "Lipids": "fats",
+  "Echocardiogram": "ultrasound test of the heart",
+  "Cardiomegaly": "enlarged heart",
+  "Hypertension": "high blood pressure",
+  "Antihyperlipidemic medications": "medicines to lower fats in the blood",
+  "Antihypertensive therapy": "treatment to lower high blood pressure",
+  "Myocardial infarction": "heart attack",
+  "Cerebrovascular accident": "stroke",
+  "Dyspnea": "shortness of breath",
+  "Gastroesophageal reflux disease (GERD)": "acid reflux",
+  "Osteoporosis": "weak and brittle bones",
+  "Diabetes mellitus":  "high blood sugar",
+  "Alopecia": "hair loss",
+  "Edema": "swelling",
+  "Arrhythmia": "irregular heartbeat",
+  "Arthralgia": "joint pain",
+  "Artrial fibrillation": "irregular and often rapid heart rate, which can increase the risk of stroke and other heart-related complications",
+
+  "Arrhythmia": "Irregular heartbeat",
+  "Arthralgia": "Joint pain"
 
 
   };
