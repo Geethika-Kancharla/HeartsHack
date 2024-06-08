@@ -74,13 +74,11 @@ const Home = () => {
                                     <a href="deadlockAlgo/deadlock.html">
                                         <div className="image">
                                             <div className="link">  </div>
-                                            <div className="title">RECOMMENDED DIET FOR HEALTHY HEART</div>
+                                            <div className="title">ABOUT</div>
                                         </div>
                                         <div className="text">
                                             <div className="text-heading">Need HELP ?</div>
-                                            Discover the key dietary recommendations and food
-                                            choices essential for maintaining a healthy heart
-                                            and promoting cardiovascular wellness.
+                                            Discover the latest articles on cardiac health, covering topics such as prevention, treatment, lifestyle changes, and advancements in cardiology research.
                                         </div>
                                     </a>
                                 </div>
@@ -148,8 +146,9 @@ const Home = () => {
                                     <p className="text-xs text-gray-100 hover:bg-grey-100 mt-3"></p>
                                 </div>
                             </div>
-                            <div class="text-center">
-    <p>&copy; 2024 MediSimplify. Made With Love By Three Coders.</p>
+                            <div class="text-center text-green-400 border border-black flex flex-col space-y-2">
+    <p> Copyright &copy; 2024 MediSimplify. </p>
+    <p>Made With ❤️ By Three Coders.</p>
 </div>
 
                            
