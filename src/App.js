@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import { useFirebase } from './context/Firebase';
 import Voice from './pages/Voice';
 import About from './pages/About'
-import Admin from './pages/Admin';
 
 function App() {
   const firebase = useFirebase();
@@ -23,9 +22,6 @@ function App() {
       <Route path='/home' element={<RequireAuth><Home /></RequireAuth>} />
       <Route path='/voice' element={<RequireAuth><Voice /></RequireAuth>} />
       <Route path='/about' element={<RequireAuth><About /></RequireAuth>} />
-      <Route path='/admin' element={<RequireAuth><Admin /></RequireAuth>} />
-
-
     </Routes>
   );
 }
